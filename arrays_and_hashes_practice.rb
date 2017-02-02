@@ -13,21 +13,26 @@ lines[4]
 lines.last
 lines[-1]
 lines.at(4)
+lines.slice(4)
+lines.fetch(4)
 
 # 4. Work out the index position of 'Haymarket'
-lines.include?("Haymarket")
+lines.include?("Haymarket") #doesn't show the exact position - only gives true that is included
+lines.index("Haymarket") #will give the index position
 
 # 5. Add 'Airport' to the start of the array
 lines.unshift("Airport")
 
 # 6. Add 'York Place' to the end of the array
 lines.push("York Place")
+lines << "York Place" #shovel operator that adds York place to the end of the array
 
 # 7. Remove 'Edinburgh Park' from the array using it's name
 lines.delete("Edinburgh Park")
 
 # 8. Delete 'Edinburgh Park' from the array by index
-lines.delete[1]
+lines.delete[1] #check this the below command works. I may be confusing hashes and arrays here.
+lines.delete_at{1}
 
 # 9. Reverse the positions of the stops in the array
 lines.reverse!
@@ -46,7 +51,10 @@ my_hash[:two]
 my_hash["two"]
 
 # 4. How would you add `{3 => "Three"}` to the hash?
-my_hash[3] = 2
+my_hash[3] = "Three"  #I had put 2 here - no idea why
+my_hash.merge!({3 => "Three"})
+my_hash.store(3, "Three")
+puts my_hash
 
 # 5. How would you add `{:four => 4}` to the hash?
 my_hash[:four] = 4
@@ -99,15 +107,23 @@ users["Avril"][:pets]["colin"]
 
 # 5. Return the smallest of Erik's favorite numbers
 users["Erik"][:favourite_numbers].first
+users["Erik"][:favourite_numbers].min   #gives the minimum value in the array
 
 # 6. Add the number `7` to Erik's favorite numbers
 users["Erik"][:favourite_numbers].unshift(7)
+users["Erik"][:favourite_numbers].push(7)
+users["Erik"][:favourite_numbers].insert(1, 7)
 
 # 7. Change Erik's hometown to Edinburgh
-users["Erik"][:home_town] = [:Edinburgh]
+users["Erik"][:home_town] = "Edinburgh"    #Edinburgh should be a string here to be added correctly.
 
 # 8. Add a pet dog to Erik called "Fluffy"
-users["Erik"][:pets]["Fluffy"] = [:dog]
+users["Erik"][:pets]["Fluffy"] = :dog       #watch use of square brackets here. Think what do the square brackets signify?
+users["Erik"][:pets].merge!({ "fluffy" => :dog }) 
 
 # 9. Add yourself to the users hash
-users = {"Rob" => {twitter: => "robflett", favourite_numbers: => 1,8,9,31, home_town: => "Edinburgh", pets: => {"Kiefer" => :cat}}} #####not sure about this one - I think it needs the 3 ending brackets but I'm getting an error.
+# users = {"Rob" => {twitter: => "robflett", favourite_numbers: => 1,8,9,31, home_town: => "Edinburgh", pets: => {"Kiefer" => :cat}}} #####not sure about this one - I think it needs the 3 ending brackets but I'm getting an error.
+
+users.store("Rob" , {:twitter => "robflett", :favourite_numbers => 1,8,9,31, :home_town => "Edinburgh"})
+
+users["Rob"] = {:twitter => "robflett", :favourite_numbers => [1,8,9,31], :pets {"Kiefer" => :cat}} #this is the simplest way to do itand contains numbers as an array within the hash.
